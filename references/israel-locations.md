@@ -37,6 +37,22 @@ not by anyone's home base: always centre the radius on the least mobile person o
 Dropped: **Dizengoff Square** (hostage/fallen memorial site now), **Ramat HaNadiv** (memorial garden with a
 crypt).
 
+## Tel Aviv area, outdoor, checked Nov 2026 for a Saturday shoot
+| Place | What's really there | Saturday · parking · notes |
+|---|---|---|
+| Bat Yam City Hall, Max Nordau 17 | 1963 inverted pyramid, diamond-lattice screen, red band under overhang, triangle-paved plaza, palms | Closed Fri-Sat, plaza empty; shade from towers ~15:30; best rain cover. Street parking. |
+| Atarim Square, TLV | 1970s raised plaza, saucer building (disc roof with fins over glass drum), concrete benches, stairs to marina | Upper plaza quiet, promenade busy; faces W. Car park under (expensive). Redevelopment planned: check. |
+| Levinsky Market / Florentin | Shutters, graffiti alleys | Market closed Sat, empty by day; bars busy Sat night. Street parking free on Shabbat except residents-only. |
+| Jaffa Port | Working fishing basin, nets, crates, hangars, breakwater, Old Jaffa above | Open and packed Sat; calmer after dark. Port lot fills by ~14:00. |
+| Reading / Yarkon mouth | Red-white chimney, white 1930s station, timber bridge, striped tower, beach | Busy bridge, quiet beach; shoot E/NE with sun behind camera. Paid lots. Don't approach plant fences. |
+| Ashdod Big Dune | Bare golden dune, ripples, 4x4 tracks, towers on horizon, sea not visible | ~45 min from TLV; few people 10 min in. Free roadside parking. |
+| Givat Aliya reef, south Jaffa | Flat kurkar reef, tide pools, boulders, sandstone arches above | Quiet; residential above, keep revealing outfits to the south end. Paid lots nearby. |
+| Ramat Gan diamond exchange (Bursa) | Glass towers, footbridge over the Ayalon | Empty Sat; private plazas have guards: stay on public streets + footbridge. Avoid the Bnei Brak side on Shabbat. |
+| Kiryat HaMelacha | 1960s louvred workshop blocks, dense murals | Workshops closed Sat, galleries 10-14; flash street (shade from ~15:00). |
+| Givatayim, Kozlovsky hill | Observatory dome, pines, stone wall, skyline view W | Locals at sunset; fence partly blocks view (step down slope). |
+
+Dropped as weak or sensitive (Nov 2026): TLV Museum plaza (Hostages Square memorial), TAU campus (ID gate, memorials), old Central Bus Station (closing, private), Rishon coast (generic, new memorial), Hiriya (lawns). Stretch north: Hadera stream mouth under the Orot Rabin chimneys (~45 min).
+
 ## Bookable interiors and venues
 | Place | Good for | Price / notes |
 |---|---|---|

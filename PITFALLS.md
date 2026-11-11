@@ -92,6 +92,12 @@ Injected into every session by `.claude/hooks/inject-memory.sh`. The entries bel
   in the wardrobe text → `generate-storyboard` review step 2.
 
 ## Process
+- **Ended a turn with "waiting on X" while the job had already finished or no watcher was armed → run stalled
+  until someone pinged** → before ending a turn, check that a running background job or Monitor will wake
+  you (`pgrep -f scripts/gen.py`, a Monitor whose exit condition can actually fire); otherwise keep working.
+  Waiter loops that grep for a success line hang forever when the step fails: match the failure lines too.
+- **`gen.py` fal/OpenRouter fallback failed with "Broken pipe"** → full-size anchor PNGs sent inline → refs now
+  downscaled to ≤1536px JPEG in `data_uri` (`scripts/gen.py`).
 - **Built the skills by hand without skill-creator practices** → descriptions now state when to trigger,
   rules explain why, single-skill scripts are bundled in the skill folder. Use `/skill-creator` for new skills.
 - **Two sessions share this checkout** → `git add` only the files you changed (never `git add -A` while

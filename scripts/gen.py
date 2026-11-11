@@ -58,8 +58,14 @@ def part_img(path):
 
 
 def data_uri(path):
-    with open(path, "rb") as f:
-        return ("data:image/png;base64," if path.endswith(".png") else "data:image/jpeg;base64,") + base64.b64encode(f.read()).decode()
+    """fal/OpenRouter get refs inline; full-size anchor PNGs (6-8 MB each) broke the upload (Broken pipe),
+    so every ref is sent as a <=1536px JPEG copy."""
+    import tempfile
+    small = os.path.join(tempfile.gettempdir(), "gen_ref_" + str(abs(hash(os.path.abspath(path)))) + ".jpg")
+    if not os.path.exists(small) or os.path.getmtime(small) < os.path.getmtime(path):
+        subprocess.run(["sips", "-Z", "1536", "-s", "format", "jpeg", "-s", "formatOptions", "85", path, "--out", small], capture_output=True)
+    with open(small if os.path.exists(small) else path, "rb") as f:
+        return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode()
 
 
 def gen_google(out, prompt, refs, aspect):
