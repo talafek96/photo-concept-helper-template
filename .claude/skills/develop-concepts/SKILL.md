@@ -10,6 +10,15 @@ Read first: `shoots/<id>/brief.md`, `models/<name>/profile.md`, `memory/user-pho
 `references/<region>-locations.md` (region from `user-photographer.md`), the shoot's `notes.md` (what was
 already proposed/rejected), and the injected memory rules.
 
+## Two formats: pick by what the photographer wants
+- **Image-first (default for striking portfolio work; `memory/feedback-image-first-concepts.md`):** an
+  interesting real place + ONE killer image that works without a caption, ~5 frames around it, at most one
+  twist; boldness the way the photographer defined it; light physics written into `look`. This is what landed
+  after five rejected boards of clever stories.
+- **Short film (6-10 causally linked frames, steps 1-3 below):** when they ask for a story-driven series.
+Taste misses twice in a row → stop guessing: ask what they mean, with concrete options, before a 3rd try, and
+save the answer to memory.
+
 ## Process
 0. **Outdoor / no-space brief → location-first.** Run `scout-locations` for a long list (~20) of places with
    character, pick ~10, then write the story each place suggests (steps 1-7 per place).
@@ -26,11 +35,15 @@ already proposed/rejected), and the injected memory rules.
    `<region>-locations.md`); in-season props; one outfit; what we bring vs what's there; cost; permits.
    Then run **`scout-locations`** for the specific place.
 5. **Light it** with the photographer's kit (`gear.md`: every light they own, a gel colour, haze where legal).
-   If the light needs explaining, it gets a diagram (`lighting-diagram`).
+   Every lit frame gets a plan on real ground (`lighting-diagram`). Write the physics into `look` as effects
+   from unseen sources: what each light hits, the colour of the shadow, where haze is. Haze needs a still,
+   sheltered space; say honestly when a place is open and the smoke will blow away.
 6. **Boring test** (`references/creative-principles.md`): one-line hook with want + turn + payoff for each.
    Kill: no turn; "she does her hobby somewhere pretty"; a genre she already posts a lot; anything needing a
    venue, rig or rental the photographer doesn't have (pole, studio, room) unless they asked. Replace killed
-   ideas; list them in `notes.md` so they never come back.
+   ideas; list them in `notes.md` so they never come back. Also kill anything that needs set dressing or props
+   they'd have to hunt down: use the location as found. Her statement pieces are not banned; use them.
+   The most eye-catching concepts lead the board.
 7. **Self-critique pass** before generating: Does the story read from images alone? One location? Is she
    doing something, not posing? Would it stop a scroll? Is anything fake about the place? In season? Could the
    team's known vetoes (brief, `user-photographer.md`) kill it? Is it cheaper than it needs to be? Fix, then

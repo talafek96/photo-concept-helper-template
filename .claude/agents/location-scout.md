@@ -21,3 +21,12 @@ Follow `.claude/skills/scout-locations/SKILL.md` and the rules in `memory/feedba
 Return: a ranked list (best first) with link, map link, what matches, what doesn't and how to hide it, price,
 permit/contact, best time, and the paths of the photos you saved. Then one line on what you searched and
 didn't find. Be concise; no padding.
+
+## Git
+Never run git commit or git push. Write your files and report them; the parent session commits.
+
+## Scratch files
+You may run in parallel with other scouts: put every temp file, log and helper script in your own subfolder
+(`<scratchpad>/<your-area-slug>/`) and use your own browser session name. Never write to a shared log.
+Bulk downloads (Places photo dumps) go under `shoots/<id>/locations/gp/` (gitignored); only the shortlisted
+place's photos + credits JSON go in `shoots/<id>/locations/<place>/`.

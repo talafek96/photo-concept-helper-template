@@ -30,7 +30,10 @@ description: Build and publish the shoot board the photographer shares with the 
 2. Write/extend `shoots/<id>/board/board.json` (schema in the `scripts/build_board.py` docstring; a worked
    chapter: `templates/board/example-board.json`, built from `templates/concepts/example.json`). Per chapter:
    logline, "how it really looks" + photos + places + logistics, root, frames (title/action/camera, signature
-   marks), diagram, prod (styling · light with the photographer's gear · logistics/permits/cost). Page: label line (team, handles,
+   marks), the light plan of each lit frame on THAT frame (`frames[n]["light"]` + `light_text`), prod
+   (styling · light with the photographer's gear · logistics/permits/cost). More than one area or day on the
+   board → `"tabs"` (sticky tab bar, one panel per tab, chapter chips, #hash links), e.g. one tab per area,
+   plus shoot-day plan and kit. Page: label line (team, handles,
    shoot window), intro, overview table, shoot-day plan, kit list, what not to bring.
 3. `python3 scripts/build_board.py shoots/<id>` → fixes any MISSING images it reports.
 4. Proofread the board language (reversed RTL sentences and typos slipped through before); grep for leftovers

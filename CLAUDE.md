@@ -31,9 +31,11 @@ their request. If the SessionStart hook warns that origin is the shared template
    `references/creative-principles.md`. Write each as `shoots/<shoot>/concepts/<slug>.json`.
 4. **`scout-locations`**: every location is real and verified by recent, dated photos. Map pins,
    reference photos with credits, permits, price. For bookable interiors use `scripts/listings/`.
-5. **`generate-storyboard`**: `scripts/gen.py` (Nano Banana Pro → fal Seedream → OpenRouter), then review
+5. **`generate-storyboard`**: `scripts/gen.py` (Nano Banana Pro on Google → the same model on OpenRouter → fal
+   Seedream as a weaker last resort; `--strict` = no fallback), then review
    every frame for identity drift and fake architecture before the photographer sees it.
-6. **`lighting-diagram`**: a physically honest top-down plan for every flash/gel concept (`scripts/diagram.py`).
+6. **`lighting-diagram`**: a physically honest metric light plan for every lit frame, on real ground, drawn as
+   two 3D diagrams (camera POV with the lens frame + overview) from a layout blockout, independently checked.
 7. **`publish-board`**: `scripts/build_board.py` → Artifact, in the board language (RTL or LTR); the board
    is shared with the producer and model, so it contains no questions, notes-to-self or unfinished text.
 8. **`learn-from-feedback`**: every correction from the photographer becomes a durable rule in `memory/`, committed.

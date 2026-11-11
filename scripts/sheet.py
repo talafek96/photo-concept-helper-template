@@ -10,7 +10,8 @@ import glob, os, sys
 from PIL import Image, ImageDraw
 
 d = sys.argv[1].rstrip("/")
-files = sorted(glob.glob(os.path.join(d, "*.png")) + glob.glob(os.path.join(d, "*.jpg")))
+files = sorted(f for f in glob.glob(os.path.join(d, "*.png")) + glob.glob(os.path.join(d, "*.jpg"))
+               if os.path.basename(f)[:2].isdigit())  # frames only (NN.png); diagrams live in the same folder
 W, H, C = 600, 400, 3
 rows = (len(files) + C - 1) // C
 sheet = Image.new("RGB", (W * C, H * rows), "white")

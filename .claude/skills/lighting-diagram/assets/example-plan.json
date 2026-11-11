@@ -1,0 +1,24 @@
+{
+  "name": "pieta",
+  "note": "Worked example: a cosplay couple (pieta pose) in a real church courtyard corner: arch wall back-left, mosaic wall coming forward on the right. Read off a dated Commons photo of the place and the AI frame. Gear labels are one photographer's kit: use the names in references/gear.md.",
+  "floor": [[-3.5, 0.2], [3.8, 0.2], [3.6, 3.4], [-0.4, 6.0], [-3.5, 6.2]],
+  "walls": [
+    {"from": [-3.5, 6.2], "to": [-0.4, 6.0], "height": 4.5, "label": "ARCH WALL",
+     "features": [{"type": "arch", "at": 0.55, "width": 0.54, "spring": 1.6, "rise": 0.85, "label": "ARCH", "label_y": 3.0}]},
+    {"from": [-0.4, 6.0], "to": [3.6, 3.4], "height": 4.5, "fill": [226, 220, 204], "label": "MOSAIC WALL",
+     "features": [{"type": "rect", "t": [0.0, 0.55], "y": [0.0, 0.6], "filled": true},
+                  {"type": "rect", "t": [0.3, 0.75], "y": [1.4, 3.9], "label": "SERAPH MOSAIC", "label_y": 3.6}]}
+  ],
+  "boxes": [{"label": "STEPS", "x": [-2.6, -0.9], "z": [5.16, 6.0], "h": 0.45}],
+  "subjects": [{"label": "COUPLE (kneeling, she lies across him)", "at": [-0.1, 4.4], "height": 1.35, "pose": "kneel"}],
+  "props": [{"label": "FM01 fogger", "at": [-0.3, 5.2], "height": 0.25, "in_frame_ok": "hidden behind his back"}],
+  "lights": [
+    {"label": "KEY: AD200 + 90cm octa, full CTO, 2.8 m", "at": [1.3, 2.8], "height": 2.8, "modifier": "octa", "size": 0.9,
+     "aim": [-0.1, 4.4, 1.3], "color": "orange"},
+    {"label": "RIM: V100 bare, 2.7 m", "at": [1.75, 4.5], "height": 2.7, "modifier": "bare",
+     "aim": [-0.1, 4.4, 1.2], "color": "blue"}
+  ],
+  "camera": {"at": [0.0, 0.0], "height": 0.4, "look": [-0.1, 4.4, 1.5], "focal_mm": 45, "orientation": "portrait",
+             "settings": "Nikon Z6 III, Tamron 28-75 @ 45mm, ISO 400, f/4, 1/160, WB 3200K"},
+  "side_view": {"eye": [-4.0, -4.5, 5.0], "look": [0.5, 3.5, 1.0], "vfov": 60}
+}

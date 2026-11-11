@@ -24,7 +24,16 @@ Write the concept as one line: *who she is in the story + what she wants + the t
 - Interesting = a situation with stakes or mischief: a small crime, a dare, a mistake, a secret, a role
   reversal, a game with the place itself. The location should be a character, not a backdrop.
 
-## A concept = a short film in 6-10 stills
+## Format A: image-first (one place, one killer image)
+What finally landed after five rejected boards of clever stories (`memory/feedback-image-first-concepts.md`):
+- An **interesting real place** chosen for its look (scouted by area, near the model, with the hour it's empty),
+  used as found: its own furniture, mess and light are the set.
+- **One killer image** that stops a scroll without a caption, ~5 frames around it (wide, the signature, a
+  variation, a close-up, an exit), at most ONE twist. No prop-plots, surreal gimmicks or cute gags.
+- Boldness as the photographer defines it: ask after two misses (`memory/feedback-bold-means.md`).
+- Light physics designed in: what each light hits, the colour of each shadow, where the haze is.
+
+## Format B: a short film in 6-10 stills (when they want a story-driven series)
 "A collection of beautiful photographs is NOT a concept." This was the #1 frustration with earlier AI help.
 1. Something happens to her → 2. she reacts and decides → 3. her action changes something → 4. it develops
 → 5. climax / transformation → 6. a meaningful ending.

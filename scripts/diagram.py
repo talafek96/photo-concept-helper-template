@@ -4,10 +4,18 @@ The photographer asked for these after a concept's light made no physical sense:
 and it must respect the real space - walls, distances, where spill lands, what the haze shows.
 
 Library use (write a small spec per concept, then paste the SVG into board.json "diagram"):
-    from diagram import svg, person, camera, wall, dist, AMBER, RED, BLUE
+    from diagram import svg, person, camera, wall, dist, zone, ground, line, AMBER, RED, BLUE
     s = svg({"aria": "...", "beams": [(x, y, tx, ty, COLOR, spread)], "extra": [wall(...), person(...), camera(...)],
              "lights": [(x, y, tx, ty, COLOR, "Strobe · amber gel", "role · modifier · angle", label_dx, label_dy)]})
-Canvas 620x440, camera at the bottom, background wall at the top. Write every label in the board language
+Canvas 620x440, camera at the bottom, background wall at the top.
+RULES (from a rejected board: "THERE IS A RAILING! HOW AM I SUPPOSED TO PUT THE LIGHT BEHIND HER? IN THE AIR?"):
+- One diagram = ONE named frame; it is rendered under that frame on the board.
+- Draw the real ground: zone() for every place nothing can stand (air past a railing, water, drops, traffic),
+  ground() for where stands can go. Every light and the camera sit on walkable ground, at a distance that keeps
+  them out of that frame's field of view (or say how it is hidden/retouched).
+- The light must match what the frame shows. Then an independent reviewer checks it (lighting-diagram skill).
+This flat SVG is the fallback; the main standard is the 3D blockout + two views (lighting-diagram skill).
+Write every label in the board language
 (person() and camera() take their label/title as arguments). Light names come from references/gear.md.
 Run this file directly to render three worked examples to scratch/diag_preview.html.
 """
@@ -47,6 +55,24 @@ def person(x, y, label="Model"):
 def camera(x, y, sub, title="Camera"):
     return (f'<rect x="{x-16}" y="{y-11}" width="32" height="22" rx="4" fill="var(--ink)"/><rect x="{x-7}" y="{y-21}" width="14" height="11" fill="var(--ink)"/>'
             f'<text x="{x}" y="{y+30}" class="dl">{title}</text><text x="{x}" y="{y+46}" class="ds">{sub}</text>')
+
+def zone(x, y, w, h, label, sub="", pid="z"):
+    """A no-go area seen from above (air over a railing, water, a drop, a traffic lane): hatched, labelled.
+    Every diagram draws these, so it is obvious that no stand, person or camera can be placed there."""
+    return (f'<defs><pattern id="{pid}" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+            f'<line x1="0" y1="0" x2="0" y2="8" stroke="var(--muted)" stroke-width="1.2" stroke-opacity="0.55"/></pattern></defs>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#{pid})"/>'
+            f'<text x="{x+w/2}" y="{y+h/2}" class="dl">{label}</text>' + (f'<text x="{x+w/2}" y="{y+h/2+16}" class="ds">{sub}</text>' if sub else ""))
+
+def ground(x, y, w, h, label, lx=None, ly=None):
+    """Walkable ground where stands/camera can go: outlined, label in a corner."""
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="none" stroke="var(--muted)" stroke-width="1.5"/>'
+            f'<text x="{x+w/2 if lx is None else lx}" y="{y+h-8 if ly is None else ly}" class="ds">{label}</text>')
+
+def line(x1, y1, x2, y2, label="", tx=0, ty=0, w=5):
+    """A physical edge drawn solid: railing, curb, wall top, waterline."""
+    t = f'<text x="{tx}" y="{ty}" class="ds">{label}</text>' if label else ""
+    return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="var(--ink)" stroke-width="{w}"/>' + t
 
 def wall(y, label, sub, color="var(--ink)"):
     return (f'<rect x="40" y="{y-10}" width="540" height="14" fill="{color}"/><text x="310" y="{y-18}" class="dl">{label}</text>'

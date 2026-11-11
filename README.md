@@ -15,9 +15,11 @@ It will:
    with your kit.
 4. **Scout real locations**: recent dated photos, Commons photos with credits, Google Maps pins, permits,
    cheap bookable interiors screened by photo at scale.
-5. **Generate storyboards** of the actual model (Nano Banana Pro → fal.ai Seedream for bold → OpenRouter),
+5. **Generate storyboards** of the actual model (Nano Banana Pro, directly or via OpenRouter; fal.ai Seedream
+   as a weaker last resort),
    reviewed for likeness and continuity.
-6. **Draw lighting diagrams** that respect the space and your gear.
+6. **Draw lighting diagrams** per frame: a metric plan on the real ground, rendered as a camera-POV view and an
+   overview, in a style you choose (`references/diagram-style/`), checked against the frame.
 7. **Publish a board** (a claude.ai artifact, in your language, RTL or LTR) you can share with the producer
    and model.
 8. **Learn from your feedback**: every correction becomes a rule in `memory/`, committed and pushed, and
@@ -49,10 +51,11 @@ If you cloned the template by mistake, the agent warns you at start-up; fix it w
   them up by name). Each command prompts for the key, so it never lands in your shell history:
   ```bash
   security add-generic-password -a "$USER" -s photoprep-gemini-key -w   # Google AI Studio key (Nano Banana Pro); best likeness
-  security add-generic-password -a "$USER" -s fal-key -w                # fal.ai key (Seedream); for bold content Google refuses
-  security add-generic-password -a "$USER" -s openrouter-key -w         # OpenRouter key; last resort
+  security add-generic-password -a "$USER" -s openrouter-key -w         # OpenRouter key; the same Nano Banana Pro without Google's daily limit
+  security add-generic-password -a "$USER" -s fal-key -w                # fal.ai key (Seedream); forgiving but less coherent, last resort
   ```
-  Gemini + fal is the recommended pair. To replace a key, add `-U`. Check one exists (without printing it):
+  Gemini + OpenRouter is the recommended pair (same model, two quotas); add fal only if you want a fallback for
+  content Google refuses. To replace a key, add `-U`. Check one exists (without printing it):
   `security find-generic-password -s fal-key >/dev/null && echo ok`.
 - [OpenCLI](https://github.com/jackwener/opencli) + its Chrome extension (Browser Bridge), for Instagram
   (posts, highlights, DMs) and listing sites, through your own logged-in Chrome:

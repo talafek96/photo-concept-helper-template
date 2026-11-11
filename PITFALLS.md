@@ -73,6 +73,18 @@ Injected into every session by `.claude/hooks/inject-memory.sh`. The entries bel
   car and the shoot fell on a no-transit rest day) → intake never asked where she lives, how she travels or what
   weekday it is → radius centred on the least mobile person; rest-day status + parking per place → `new-shoot`
   step 7, `scout-locations`, `memory/feedback-plan-around-least-mobile.md`.
+- **Two more boards rejected ("not interesting, don't make sense, not the bold kind I asked for")** → kept
+  guessing what bold meant and built clever prop-plots → after two taste misses, ask with concrete options;
+  the image-first format (place + one killer image) then landed → `memory/feedback-bold-means.md`,
+  `memory/feedback-image-first-concepts.md`, `develop-concepts` (two formats).
+- **The model's own boots and lingerie left out of every concept** → the boring-test rule banned "her own set"
+  instead of the repeated setting → statement pieces are welcome in new places → `memory/feedback-boring-test.md`.
+- **Banquet concepts needed tablecloths, candle holders and silverware the photographer had no time to find** →
+  designed a set instead of using the place → use locations as found, wardrobe + lights + haze only →
+  `memory/feedback-producible-with-own-means.md`, `develop-concepts` step 6.
+- **A plan put the haze/shaft light in a "side opening" no photo showed, and the AI frame widened a narrow
+  passage into a grand vault** → plan and frame built from the AI image → features only from dated real photos;
+  say plainly when haze needs a still night (a passage open at both ends isn't enclosed) → `lighting-diagram` step 2.
 
 ## Scouting
 - **`scripts/commons/search.py` crashed (UnboundLocalError) on repeated Commons 429s** → longer retries, skip the term instead of crashing → fixed in the script.
@@ -87,9 +99,35 @@ Injected into every session by `.claude/hooks/inject-memory.sh`. The entries bel
   `generate-storyboard` SKILL.md review step 2.
 - **Ten concepts generated at once → Gemini quota errors, fal fallback rejected refs, 15 frames missing** → max 2
   Google concepts concurrently, queue the rest → `generate-storyboard` SKILL.md.
+- **The photographer raised the Google spend cap, yet frames still came from fal and looked visibly less coherent
+  ("which model did you use?")** → `gen.py` fell back silently, and Google's separate daily limit (Tier 1: 250
+  image requests/day per model, failed calls count) ran out → `--strict`, `NN.png.src` per frame, `!! fell back`
+  warning, chain Google → OpenRouter (same Nano Banana Pro) → fal; the 429 text says which limit → `scripts/gen.py`,
+  `generate-storyboard`, `memory/feedback-identity-and-continuity.md`.
+- **fal showed "Broken pipe" while the real error was "User is locked: exhausted balance"** → when every retry
+  fails, probe `gen.gen_fal(...)` with no refs to read the real error; tell the photographer which balance to top up.
+- **Frames showed the strobe/octa/LED panel named in `look`, a sunbeam through a solid ceiling, a debris mountain
+  instead of a few stacked tables, drapes turned into a net** → describe light as effects from unseen sources and
+  set pieces literally as in the real photo → `generate-storyboard` review.
+- **Nano Banana copied the anchor frame's composition into every frame** → give each frame an explicit shot size
+  (wide / medium / tight close-up) → `generate-storyboard` review.
+- **OpenRouter `openai/gpt-5.4-image-2` returns 502 "Complexity none not supported"** → OpenRouter now tries
+  `google/gemini-3-pro-image-preview` first → `scripts/gen.py`.
 - **Tattoos painted on overalls / on knees under a pencil skirt / on backs of legs; duplicated model; forced-perspective
   object moved close; black two-piece rendered as one-piece** → review checklist items + say where tattoos are hidden
   in the wardrobe text → `generate-storyboard` review step 2.
+
+## Lighting plans
+- **A rim light "behind her" on a bridge where behind her was a railing and air; plans not tied to any frame** →
+  diagrams drawn from the story, not the real ground, and unchecked → one metric plan per named frame,
+  blockout + FRAME CHECK, POV + overview diagrams, independent gaffer review → `lighting-diagram` skill,
+  `build_board.py` (`frames[n].light`).
+- **Red shadows on white walls, floating shadows, a flash "colouring" a building 15 m away at noon** → no physics
+  check on frames or plans → physics rules in `lighting-diagram` step 3 and the `generate-storyboard` review.
+- **3D diagram edits kept a wrong draft's geometry; text alone put lights in the wrong place; a photo generated
+  with the diagram attached mirrored the pose** → regenerate fresh from a blockout; never attach a diagram to the
+  photo generation → `lighting-diagram` steps 4-5.
+- **One eye-level diagram hid that the backlight was behind the subject** → always two views (POV + overview).
 
 ## Process
 - **Ended a turn with "waiting on X" while the job had already finished or no watcher was armed → run stalled
@@ -97,7 +135,9 @@ Injected into every session by `.claude/hooks/inject-memory.sh`. The entries bel
   you (`pgrep -f scripts/gen.py`, a Monitor whose exit condition can actually fire); otherwise keep working.
   Waiter loops that grep for a success line hang forever when the step fails: match the failure lines too.
 - **`gen.py` fal/OpenRouter fallback failed with "Broken pipe"** → full-size anchor PNGs sent inline → refs now
-  downscaled to ≤1536px JPEG in `data_uri` (`scripts/gen.py`).
+  downscaled to ≤1152px JPEG in `data_uri` (1536 still broke on 9-ref frames) (`scripts/gen.py`).
+- **A location-scout subagent committed and pushed with a co-author trailer; parallel scouts overwrote each
+  other's logs** → scouts never commit and each works in its own scratch subfolder → `.claude/agents/location-scout.md`.
 - **Built the skills by hand without skill-creator practices** → descriptions now state when to trigger,
   rules explain why, single-skill scripts are bundled in the skill folder. Use `/skill-creator` for new skills.
 - **Two sessions share this checkout** → `git add` only the files you changed (never `git add -A` while

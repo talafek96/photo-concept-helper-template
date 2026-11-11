@@ -33,11 +33,14 @@ board.json schema (all text is HTML-safe already; write it in the board language
      "places": [{"name": "...", "meta": "...", "url": "<maps url>", "body": "...", "pick": true}],
      "logistics": "...",
      "root": {"label": "The root", "quote": "...", "quote_lang": "en", "text": "..."},   # optional
-     "frames": [{"title": "...", "action": "...", "camera": "...", "sig": false, "label": ""}],
+     "frames": [{"title": "...", "action": "...", "camera": "...", "sig": false, "label": "",
+                 "light": "<svg or <img> of THIS frame's light plan>", "light_text": [["Key", "..."], ...]}],  # light optional
      "diagram": "<svg ...>",                  # optional, from scripts/diagram.py
      "prod": [["Styling", "..."], ["Light with your kit", "..."], ["Logistics", "..."]]
   }],
-  "sections": [{"id": "plan", "h2": "Shoot-day plan", "html": "<div class='cols'>...</div>"}]
+  "sections": [{"id": "plan", "h2": "Shoot-day plan", "html": "<div class='cols'>...</div>"}],
+  "tabs": [{"id": "city", "label": "City", "chapters": ["slug", ...], "overview": true, "intro": "..."},   # optional:
+           {"id": "plan", "label": "Shoot day", "section": "plan"}]   # sticky tab bar, one panel per tab, #hash routing
 }
 """
 import html, json, os, re, sys
@@ -50,12 +53,14 @@ STRINGS = {
            "sig": "פריים חתימה", "camera": "מצלמה", "action": "פעולה", "frame": "פריים",
            "real_title": "איך זה נראה במציאות", "diagram": "דיאגרמת תאורה", "storyboard": "סטוריבורד",
            "frames_hint": "פריימים · לחצו להגדלה", "overview": "במבט אחד", "toc": "תוכן",
-           "lightbox": "תצוגה מוגדלת", "open_frame": "פתיחת פריים"},
+           "lightbox": "תצוגה מוגדלת", "open_frame": "פתיחת פריים",
+           "light_for": "תאורה לפריים", "chapters": "פרקים", "tabs": "לשוניות"},
     "en": {"real_tag": "Real photo", "ai_tag": "AI sketch", "photo_by": "Photo:", "pick": "Shooting spot",
            "sig": "Signature frame", "camera": "Camera", "action": "Action", "frame": "Frame",
            "real_title": "How it really looks", "diagram": "Lighting diagram", "storyboard": "Storyboard",
            "frames_hint": "frames · click to enlarge", "overview": "At a glance", "toc": "Contents",
-           "lightbox": "Enlarged view", "open_frame": "Open frame"},
+           "lightbox": "Enlarged view", "open_frame": "Open frame",
+           "light_for": "Light for frame", "chapters": "Chapters", "tabs": "Tabs"},
 }
 T = dict(STRINGS["en"])   # set per board in build()
 
@@ -82,8 +87,13 @@ def shot(slug, n, f, ai_tag):
     s = f'<span class="sig">{T["sig"]}</span>' if f.get("sig") else ""
     cam = f'<dt>{T["camera"]}</dt><dd>{f["camera"]}</dd>' if f.get("camera") else ""
     lab = f' · {f["label"]}' if f.get("label") else ""
+    lt = ""
+    if f.get("light"):  # the light plan belongs to THIS frame and sits right under it
+        rows = "".join(f"<dt>{h}</dt><dd>{t}</dd>" for h, t in f.get("light_text", []))
+        lt = (f'<div class="shot-light"><h5>{T["light_for"]} {nn}</h5><div class="sl-grid"><div class="sl-svg">{f["light"]}</div>'
+              f'<dl class="sl-text">{rows}</dl></div></div>')
     return (f'<div class="shot"><img src="img/{slug}-{nn}.jpg" alt="{T["frame"]} {n}: {E(re.sub("<[^>]+>", "", f["title"]))}" loading="lazy">'
-            f'<div class="shot-text">{s}<span class="shot-no">{nn}{lab}</span><h4>{f["title"]}</h4><dl><dt>{T["action"]}</dt><dd>{f["action"]}</dd>{cam}</dl></div></div>')
+            f'<div class="shot-text">{s}<span class="shot-no">{nn}{lab}</span><h4>{f["title"]}</h4><dl><dt>{T["action"]}</dt><dd>{f["action"]}</dd>{cam}</dl></div>{lt}</div>')
 
 
 def chapter(c, real_tag, ai_tag):
@@ -140,7 +150,21 @@ def build(shoot):
     T.clear(); T.update(STRINGS.get(b.get("lang", "en"), STRINGS["en"])); T.update(b.get("strings", {}))
     css = open(os.path.join(REPO, "templates", "board", "board.css")).read()
     extra = (".realtext{display:grid;gap:10px;max-width:76ch}.loc-photos figure img{cursor:zoom-in}figcaption a{color:inherit}"
-             ".diagram-wrap{margin:28px 0}.diagram-wrap svg{width:100%;max-width:640px;height:auto;display:block}")
+             ".diagram-wrap{margin:28px 0}.diagram-wrap svg{width:100%;max-width:640px;height:auto;display:block}"
+             ".shot-light{grid-column:1/-1;border-top:2px solid var(--accent);padding-top:14px}.shot-light h5{font-size:17px;font-weight:800;margin:0 0 10px}"
+             ".sl-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}"
+             ".sl-svg svg{width:100%;height:auto;display:block}.sl-text{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:15px}"
+             ".sl-text dt{font-size:13px;font-weight:700;color:var(--muted);padding-top:2px}.sl-text dd{margin:0}"
+             "@media (max-width:760px){.sl-grid{grid-template-columns:1fr}}"
+             # tabs (optional board["tabs"]): sticky bar, one panel per tab, chapter chips per panel
+             "body::before{content:'';position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}"
+             ".tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line);"
+             "display:flex;gap:6px;overflow-x:auto;padding-block:10px;margin-bottom:8px;scrollbar-width:none}"
+             ".tabbar a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;padding:8px 14px;border-radius:999px;border:1px solid var(--line)}"
+             ".tabbar a[aria-current=page]{background:var(--ink);color:var(--bg);border-color:var(--ink)}"
+             ".chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 22px}.chips a{font-size:14px;text-decoration:none;color:var(--ink);"
+             "padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}.chips a:hover{border-color:var(--ink)}"
+             ".tabpanel>.tab-intro{max-width:76ch;margin-bottom:10px}.tabpanel>h2.tab-h{font-size:30px;font-weight:800;margin:18px 0 6px}.tabpanel .chapter{scroll-margin-top:70px}.tabpanel{scroll-margin-top:70px}")
     real_tag, ai_tag = b.get("real_tag", T["real_tag"]), b.get("ai_tag", T["ai_tag"])
     chs = b["chapters"]
     for c in chs:  # titles/quotes default to the board language (a hardcoded default once mis-tagged every title)
@@ -157,6 +181,29 @@ def build(shoot):
     toc = "".join(f'<a href="#{c["slug"]}" lang="{c["title_lang"]}">{c["title"]}</a>' for c in chs) + \
         "".join(f'<a href="#{s["id"]}">{s["h2"]}</a>' for s in b.get("sections", []))
     strip = "".join(f'<img src="img/{s}" alt="">' for s in b.get("strip", []))
+    body = f"{ov}\n" + "".join(chapter(c, real_tag, ai_tag) for c in chs) + f"\n{secs}"
+    tabbar = ""
+    if b.get("tabs"):  # true tabs: each tab is a panel; hash routing (#tabid or #chapter-slug) shows the right panel
+        by = {c["slug"]: c for c in chs}
+        secd = {x["id"]: x for x in b.get("sections", [])}
+        panels = []
+        for t in b["tabs"]:
+            inner = f'<h2 class="tab-h">{t["label"]}</h2>'
+            if t.get("intro"):
+                inner += f'<div class="tab-intro prose">{t["intro"]}</div>'
+            if t.get("chapters"):
+                inner += f'<nav class="chips" aria-label="{T["chapters"]}">' + "".join(
+                    f'<a href="#{sl}">{by[sl]["num"].split("·")[0].strip()} {by[sl]["title"]}</a>' for sl in t["chapters"]) + "</nav>"
+                if t.get("overview") and b.get("overview"):
+                    o = b["overview"]; rows = [r for r in o["rows"] if any(f"#{sl}'" in r[0] for sl in t["chapters"])]
+                    inner += ('<div class="tablewrap"><table><thead><tr>' + "".join(f"<th>{h}</th>" for h in o["head"]) + "</tr></thead><tbody>"
+                              + "".join("<tr>" + "".join(f"<td>{x}</td>" for x in r) + "</tr>" for r in rows) + "</tbody></table></div>")
+                inner += "".join(chapter(by[sl], real_tag, ai_tag) for sl in t["chapters"])
+            if t.get("section"):
+                inner += secd[t["section"]]["html"]
+            panels.append(f'<section class="tabpanel" id="{t["id"]}" data-tab>{inner}</section>')
+        body = "".join(panels)
+        tabbar = f'<nav class="tabbar" aria-label="{T["tabs"]}">' + "".join(f'<a href="#{t["id"]}" data-tablink="{t["id"]}">{t["label"]}</a>' for t in b["tabs"]) + "</nav>"
     page = f'''<title>{E(b["title"])}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,11 +218,10 @@ def build(shoot):
   <h1>{b.get("h1", "")} <span>{b.get("h1_sub", "")}</span></h1>
   <div class="mast-strip">{strip}</div>
   <div class="prose">{"".join(f"<p>{p}</p>" for p in b.get("intro", []))}</div>
-  <nav class="toc" aria-label="{T["toc"]}">{toc}</nav>
+  {"" if b.get("tabs") else f'<nav class="toc" aria-label="{T["toc"]}">{toc}</nav>'}
 </header>
-{ov}
-{"".join(chapter(c, real_tag, ai_tag) for c in chs)}
-{secs}
+{tabbar}
+{body}
 </div>
 <dialog id="lb" aria-label="{T["lightbox"]}"><img alt=""><p></p></dialog>
 <script>
@@ -197,6 +243,21 @@ def build(shoot):
   document.querySelectorAll('.loc-photos img').forEach(img =>
     img.addEventListener('click', () => open(img.getAttribute('src'), img.closest('figure').querySelector('figcaption').textContent)));
   lb.addEventListener('click', () => lb.close());
+  const panels = [...document.querySelectorAll('[data-tab]')];
+  if (panels.length) {{
+    const links = [...document.querySelectorAll('[data-tablink]')];
+    function route() {{
+      const id = decodeURIComponent(location.hash.slice(1));
+      let el = id && document.getElementById(id);
+      let panel = el && (el.matches('[data-tab]') ? el : el.closest('[data-tab]'));
+      if (!panel) panel = panels[0];
+      panels.forEach(p => p.hidden = p !== panel);
+      links.forEach(a => a.dataset.tablink === panel.id ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+      const target = (el && el !== panel) ? el : panel;
+      if (id) requestAnimationFrame(() => target.scrollIntoView({{block: 'start'}}));
+    }}
+    window.addEventListener('hashchange', route); route();
+  }}
 }})();
 </script>
 '''
@@ -207,6 +268,7 @@ def build(shoot):
     print(os.path.join(bd, "index.html"), len(page), "bytes,", len(used), "images")
     if missing:
         print("MISSING images:", missing)
+
 
 
 if __name__ == "__main__":
