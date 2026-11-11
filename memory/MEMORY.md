@@ -25,4 +25,4 @@ rules that contradict each other.
 - [Full kit, honest light](feedback-use-full-kit-honest-light.md): every light they own, one gel when asked; one plan per frame on real ground, independent check
 - [Identity and continuity](feedback-identity-and-continuity.md): her face, tattoo placement, owned outfits; review full size; regenerate drift; Nano Banana Pro only (`--strict`)
 - [Learn from rejections](feedback-learn-from-rejections.md): understand, one question, save the general rule
-- [Privacy and secrets](feedback-privacy-and-secrets.md): Keychain keys, no personal details to third parties, WhatsApp read-only
+- [Privacy and secrets](feedback-privacy-and-secrets.md): keys in the OS credential store, no personal details to third parties, WhatsApp read-only

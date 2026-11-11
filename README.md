@@ -31,14 +31,26 @@ as **defaults you can override**: tell it you see things differently and it rewr
 ## 1. Create your own repo (don't clone this one)
 This repo is a shared **template**. You can't push to it, and your shoots, models and memory must not end up
 here.
-1. On GitHub, click **Use this template → Create a new repository**. Make it **Private** (it will hold
-   notes about the people you photograph).
-2. Clone **your new repo** and work only there.
+Make it **private**: it will hold notes about the people you photograph. Either way works:
+
+**From the terminal** (the [GitHub CLI](https://cli.github.com), after `gh auth login`): creates the repo
+and clones it, with `origin` already pointing at it:
+```bash
+gh repo create my-photo-concepts --template talafek96/photo-concept-helper-template --private --clone
+cd my-photo-concepts
+```
+
+**On the website:** click **Use this template → Create a new repository**, choose **Private**, then clone
+your new repo.
+
+Work only in your new repo.
 
 If you cloned the template by mistake, the agent warns you at start-up; fix it with
 `git remote set-url origin <url-of-your-new-repo>`.
 
-## 2. Prerequisites (macOS)
+## 2. Prerequisites
+Written for macOS; **Windows** works too, with the differences listed under *On Windows* below.
+
 **Required**
 - [Claude Code](https://docs.claude.com/en/docs/claude-code) (a claude.ai plan with Artifacts, for the boards).
 - Python 3 with Pillow, and [uv](https://docs.astral.sh/uv/):
@@ -57,6 +69,8 @@ If you cloned the template by mistake, the agent warns you at start-up; fix it w
   Gemini + OpenRouter is the recommended pair (same model, two quotas); add fal only if you want a fallback for
   content Google refuses. To replace a key, add `-U`. Check one exists (without printing it):
   `security find-generic-password -s fal-key >/dev/null && echo ok`.
+  The scripts also read keys from environment variables of the same name in capitals (`PHOTOPREP_GEMINI_KEY`,
+  `OPENROUTER_KEY`, `FAL_KEY`) and from the Windows/Linux credential store (`scripts/keys.py`).
 - [OpenCLI](https://github.com/jackwener/opencli) + its Chrome extension (Browser Bridge), for Instagram
   (posts, highlights, DMs) and listing sites, through your own logged-in Chrome:
   ```bash
@@ -80,6 +94,24 @@ If you cloned the template by mistake, the agent warns you at start-up; fix it w
   the MCP server to Claude Code, and tell the agent where the bridge lives:
   `export WHATSAPP_BRIDGE_DIR=~/path/to/whatsapp-mcp/whatsapp-bridge` (in `~/.zshrc`). Without it, the agent
   reads Instagram DMs and whatever you paste.
+
+### On Windows
+- Install [Git for Windows](https://git-scm.com/download/win) (Claude Code uses its Git Bash; the memory hook
+  is a bash script), [Python 3](https://www.python.org/downloads/) (tick "Add to PATH"), Node.js and the GitHub
+  CLI: `winget install Git.Git Python.Python.3.12 OpenJS.NodeJS GitHub.cli astral-sh.uv`.
+- Pillow: `py -m pip install Pillow keyring`.
+- **Keys** go in Windows Credential Manager instead of the Keychain (each command prompts for the key):
+  ```powershell
+  py -m keyring set photoprep-gemini-key default
+  py -m keyring set openrouter-key default
+  py -m keyring set fal-key default
+  ```
+  Or set them as user environment variables (`PHOTOPREP_GEMINI_KEY`, ...) in System → Environment Variables.
+- If `python3` isn't found in Git Bash, run `py` once to check Python is installed, then add an alias:
+  `echo "alias python3=py" >> ~/.bashrc`.
+- Maps key file: `%USERPROFILE%\.config\google-maps-mcp.env` (same content as above).
+- OpenCLI and its Chrome extension work the same. The WhatsApp bridge (Go) builds on Windows too but needs a C
+  compiler for SQLite (see its README); it's optional.
 
 ## 3. Say hi
 Open Claude Code in **your** repo and say hi. On the first run it interviews you (a few questions at a time):

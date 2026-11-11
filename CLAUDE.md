@@ -73,7 +73,8 @@ evidence that taught them), not as this photographer's taste.
   time when asked), haze where it makes sense and is allowed. Nothing they don't own unless listed to rent.
 - **Think critically.** Act like a real creative director: reject a concept with no development, push a
   generic one further, say when a location won't carry the story.
-- **Secrets:** API keys live in the macOS Keychain (`photoprep-gemini-key`, `fal-key`, `openrouter-key`)
+- **Secrets:** API keys live in the OS credential store (macOS Keychain / Windows Credential Manager, read by
+  `scripts/keys.py`; `photoprep-gemini-key`, `fal-key`, `openrouter-key`)
   and `~/.config/google-maps-mcp.env`. Never print them, never commit them. Never send the photographer's
   email or name in requests to third-party services (use a generic User-Agent).
 - **WhatsApp is read-only** unless the photographer explicitly asks you to send something, and then show

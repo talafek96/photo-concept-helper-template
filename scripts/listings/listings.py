@@ -157,7 +157,9 @@ def sheets():
 
 
 def screen(criteria):
-    key = subprocess.check_output(["security", "find-generic-password", "-s", "photoprep-gemini-key", "-w"]).decode().strip()
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from keys import get_key
+    key = get_key("photoprep-gemini-key")
     q = ("Contact sheet of numbered photos from one rental listing. " + criteria +
          " Ignore modern renovations styled to look old. Answer JSON only: "
          '{"indices":[...], "score":0-10, "match_note":"short", "has_key_feature":bool}')

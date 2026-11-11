@@ -19,8 +19,8 @@ board subtly wrong, so do this properly, but keep it light: it's a conversation,
    `README.md`. If some answers are already there (an earlier, interrupted onboarding), only ask the rest.
 3. **Check tools silently** so you can tell them later instead of asking. Never print a key: use exit codes only.
    ```bash
-   for k in photoprep-gemini-key fal-key openrouter-key; do
-     security find-generic-password -s "$k" >/dev/null 2>&1 && echo "$k: yes" || echo "$k: MISSING"; done
+   python3 -c "import sys; sys.path.insert(0,'scripts'); from keys import get_key
+   for k in ('photoprep-gemini-key','openrouter-key','fal-key'): print(k+':', 'yes' if get_key(k) else 'MISSING')"
    command -v opencli >/dev/null && opencli doctor 2>&1 | grep -i extension || echo "opencli: MISSING"
    grep -q '^GOOGLE_MAPS_API_KEY=' ~/.config/google-maps-mcp.env 2>/dev/null && echo "maps key: yes" || echo "maps key: MISSING"
    python3 -c "import PIL" 2>/dev/null && echo "Pillow: yes" || echo "Pillow: MISSING"
@@ -98,14 +98,16 @@ to connect it later?"). Don't ask about what you already detected.
 ## 3. Tell them what's missing
 One short list, only for what's missing, each with the one command or link to fix it (details in `README.md`
 → Prerequisites):
-- No image key → `security add-generic-password -a "$USER" -s <photoprep-gemini-key|fal-key|openrouter-key> -w`
-  (prompts for the key). Without any, storyboards can't be generated; Gemini + fal is the recommended pair.
+- No image key → macOS: `security add-generic-password -a "$USER" -s <photoprep-gemini-key|openrouter-key|fal-key> -w`;
+  Windows: `py -m keyring set <name> default` (both prompt for the key). Without any, storyboards can't be
+  generated; Gemini + OpenRouter (the same Nano Banana Pro, two quotas) is the recommended pair.
 - No OpenCLI / extension → `npm install -g @jackwener/opencli`, install its Chrome extension, `opencli doctor`.
   Without it: no Instagram reading; they can drop photos in instead.
 - No WhatsApp MCP → optional; lharries/whatsapp-mcp style bridge + `WHATSAPP_BRIDGE_DIR`. Without it the
   agent reads Instagram DMs and whatever they paste.
 - No Maps key → optional; pins and current place photos come from web search and Commons instead.
-- No Pillow / uv → `brew install uv`, `python3 -m pip install --user Pillow` (or `brew install pillow`).
+- No Pillow / uv → macOS: `brew install uv`, `python3 -m pip install --user Pillow` (or `brew install pillow`);
+  Windows: `winget install astral-sh.uv`, `py -m pip install Pillow keyring`.
 
 ## 4. Commit and hand over
 If origin is their own repo:

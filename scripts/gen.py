@@ -14,7 +14,7 @@ Concept JSON (worked example: templates/concepts/example.json):
 
 Output: shoots/<shoot>/boards/<slug>/NN.png  (the concept file's shoot folder).
 Frame 1 is the anchor; frames 2+ get it as the last reference so set, wardrobe and face stay put.
-Keys come from the macOS Keychain (photoprep-gemini-key, fal-key, openrouter-key) and are never printed.
+Keys come from scripts/keys.py (env var, macOS Keychain, or the Windows/Linux credential store) and are never printed.
 A missing key just skips that provider; with no key at all, every frame fails with a clear message.
 """
 import base64, glob, json, os, subprocess, sys, time, urllib.request
@@ -23,8 +23,8 @@ from concurrent.futures import ThreadPoolExecutor
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def keychain(name):
-    return subprocess.run(["security", "find-generic-password", "-s", name, "-w"], capture_output=True, text=True).stdout.strip()
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from keys import get_key as keychain   # env var -> macOS Keychain -> Windows/Linux credential store
 
 
 GOOGLE_KEY = keychain("photoprep-gemini-key")
@@ -64,7 +64,11 @@ def data_uri(path):
     import tempfile
     small = os.path.join(tempfile.gettempdir(), "gen_ref_" + str(abs(hash(os.path.abspath(path)))) + ".jpg")
     if not os.path.exists(small) or os.path.getmtime(small) < os.path.getmtime(path):
-        subprocess.run(["sips", "-Z", "1152", "-s", "format", "jpeg", "-s", "formatOptions", "80", path, "--out", small], capture_output=True)
+        try:  # Pillow, so it works on any OS (was macOS-only `sips`)
+            from PIL import Image
+            im = Image.open(path).convert("RGB"); im.thumbnail((1152, 1152)); im.save(small, "JPEG", quality=80)
+        except Exception as e:
+            print("ref downscale failed, sending full size:", os.path.basename(path), e, file=sys.stderr)
     with open(small if os.path.exists(small) else path, "rb") as f:
         return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode()
 
@@ -187,7 +191,7 @@ def frame_prompt(c, i, frame, anchor):
 
 def run(concept_file, only=None, provider=None, force=False):
     if not (GOOGLE_KEY or FAL_KEY or OR_KEY):
-        sys.exit("no image API key in the Keychain (photoprep-gemini-key / fal-key / openrouter-key) - see README.md")
+        sys.exit("no image API key in the Keychain/credential store or env vars (photoprep-gemini-key / fal-key / openrouter-key) - see README.md")
     c = json.load(open(concept_file))
     shoot_dir = os.path.dirname(os.path.dirname(os.path.abspath(concept_file)))
     od = os.path.join(shoot_dir, "boards", c["slug"])

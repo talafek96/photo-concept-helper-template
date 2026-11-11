@@ -11,7 +11,7 @@
 
 Screening/vision (cheap): Gemini flash via the same Google key (`gemini-3.8-flash` as of Nov 2026; old ids
 404 with a message naming the replacement).
-Never print keys. Never paste them into files. Read with `security find-generic-password -s <name> -w`.
+Never print keys. Never paste them into files. Read them through `scripts/keys.py` (`get_key(name)`): env var, macOS Keychain, or the Windows/Linux credential store.
 
 ## Identity: the model must be herself
 - 5-6 refs in `models/<name>/refs/`: a clear frontal face, a close-up, a 3/4 or profile, hair, each tattooed
