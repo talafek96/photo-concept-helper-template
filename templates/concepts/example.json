@@ -1,0 +1,28 @@
+{
+ "_comment": "Worked example with an invented model (Maya) and a placeholder location. Real concepts live in shoots/<id>/concepts/<slug>.json; scripts/gen.py reads slug, title, model, premise, setting, wardrobe, look, frames, and optionally loc_refs, provider, aspect. 'tag' is for the board. Keys starting with '_' are ignored.",
+ "slug": "lastbus",
+ "title": "Last Bus",
+ "model": "maya",
+ "tag": "editorial",
+ "premise": "Root: the universal small tragedy of missing the last bus home, and the old superstition that flowers found on your path are meant for you. Maya, dressed up for a night that went nowhere, misses the last bus at a bare concrete shelter on the edge of town. On the bench she finds someone else's abandoned bouquet with a sealed card. Instead of sulking she adopts the bouquet and the night: she reads the card, performs to the empty road, flags down the next headlights with the flowers, and finally walks home barefoot, leaving the card behind for whoever comes next.",
+ "setting": "A real concrete bus shelter at the edge of a small town at blue hour (replace this with the scouted shelter's description as it looks TODAY): grey precast concrete back wall with a long wooden-slat bench, a scratched clear polycarbonate side panel, a pole timetable sign with no readable text, one tall sodium streetlamp throwing orange light, a two-lane asphalt road with a gravel shoulder, low dry scrub and a chain-link fence behind, distant town lights. No other people, no shops, no readable signage, no foreign decor.",
+ "wardrobe": "A black satin slip dress to mid-calf over a fitted opaque black bodysuit, a cropped oversized denim jacket worn off one shoulder, thin gold hoops, black strappy heels that she carries in her hand from frame 1 and leaves behind in frame 8 (barefoot from frame 2). Hair: long dark waves, slightly wind-messed, worn loose the whole series. Makeup: smudged black liner, glossy nude lips. The bouquet: a large loose bunch of in-season flowers (check references/seasonality-<region>.md for the shoot month) wrapped in brown kraft paper with a small cream envelope tucked in.",
+ "look": "Blue-hour ambient with direct on-camera flash, film-snapshot aesthetic: hard specular highlights, quick falloff, a deep blue sky against orange sodium light, one red gel standing in for passing tail lights, slow shutter (1/4-1/8 s) with rear-curtain sync for light trails, visible grain, slightly tilted intimate framing. Story readable without any text.",
+ "frames": [
+  "Establishing wide from across the road at blue hour: the bus pulling away to the right as long red tail-light streaks (slow shutter), the empty concrete shelter under the single orange streetlamp; Maya mid-run on the gravel shoulder, one black heel in her hand and the other half off her foot, denim jacket flying, frozen by a rear-curtain flash. She is a small figure in a big blue night.",
+  "Medium shot at the kerb: Maya stops, breathless, kicks off the second heel, hair across her face, watching the red lights shrink down the road; arms hanging, a heel dangling from each hand; deflated half-laugh. Direct flash, the streetlamp orange on the asphalt behind her.",
+  "SIGNATURE: shot through the scratched polycarbonate side panel of the shelter: Maya turns back and freezes, looking down at the bench where a big bouquet in brown kraft paper lies alone with a small cream envelope tucked in; her reflection in the panel overlaps the flowers. Curious, wary.",
+  "Close-up inside the shelter: Maya sits beside the bouquet, the open cream card in her fingers (its writing not visible to camera), a slow mischievous grin spreading; she pulls one flower out and tucks it behind her ear. Direct flash, soft orange spill from the streetlamp on her cheek.",
+  "Wide inside the shelter: Maya stands barefoot on the wooden bench singing into the bouquet like a microphone, one arm flung out to the empty road; a single hard red-gelled light from low camera-right throws her giant red shadow across the grey concrete back wall. Heels lie on the ground below.",
+  "Headlights appear: Maya has jumped down to the shoulder, holding the bouquet out at arm's length like a hitchhiker's sign, one bare foot forward on the gravel, a cheeky challenging stare straight into the lens as if the camera were the oncoming car; strong backlight from the headlights rims her hair and the paper wrap.",
+  "SIGNATURE close-up, low angle: wind from the passing car, petals tearing loose from the bouquet and streaking past her face in the slow shutter, her head thrown back laughing, the flower still behind her ear; hard direct flash freezes her face while the petals blur.",
+  "Ending, wide from across the road, same position as frame 1: the shelter is empty except for the open cream card propped on the bench and her black heels side by side under it; Maya walks away barefoot along the gravel shoulder into the deep blue, the bouquet over her shoulder, a small figure again, but now unhurried."
+ ],
+ "loc_refs": [
+  "shoots/<YYYY-MM>-maya-<theme>/locations/shelter/02.jpg",
+  "shoots/<YYYY-MM>-maya-<theme>/locations/shelter/05.jpg",
+  "shoots/<YYYY-MM>-maya-<theme>/locations/gp/shelter_01.jpg"
+ ],
+ "provider": "google",
+ "aspect": "3:2"
+}

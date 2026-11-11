@@ -1,0 +1,1 @@
+One folder per shoot (`shoots/<YYYY-MM>-<model>-<theme>/`): `brief.md`, `concepts/*.json`, `board/board.json` + `index.html` and `notes.md` are tracked; generated frames, web images and downloaded location photos are gitignored. Opened by the `new-shoot` skill.

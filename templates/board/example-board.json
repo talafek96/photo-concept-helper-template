@@ -1,0 +1,139 @@
+{
+ "_comment": "Worked example of board.json for scripts/build_board.py (one chapter, English, LTR). Built from templates/concepts/example.json. Real boards live in shoots/<id>/board/board.json; images go in shoots/<id>/board/img/.",
+ "title": "Maya: Last Bus",
+ "lang": "en",
+ "dir": "ltr",
+ "label": "Concept board · photographer × producer × Maya · shoot window: <month year>",
+ "h1": "Maya",
+ "h1_sub": "/ Last Bus",
+ "strip": [
+  "lastbus-01.jpg",
+  "lastbus-03.jpg",
+  "lastbus-07.jpg"
+ ],
+ "intro": [
+  "One concept, one real place, one night: a short film in eight stills. Real photos of the location are marked as real, with credit and year; storyboard frames are AI sketches of the look and the action, not of the final light."
+ ],
+ "overview": {
+  "head": [
+   "Concept",
+   "Where",
+   "When",
+   "Look"
+  ],
+  "rows": [
+   [
+    "<a href='#lastbus'>Last Bus</a>",
+    "Concrete bus shelter at the edge of town (free, public)",
+    "Blue hour, ~40 min",
+    "Direct flash + one red gel, slow shutter"
+   ]
+  ]
+ },
+ "chapters": [
+  {
+   "slug": "lastbus",
+   "accent": "#B3261E",
+   "accent_dark": "#F2867E",
+   "num": "01",
+   "title": "Last Bus",
+   "trans": "",
+   "hero": 3,
+   "logline": "She missed the last bus. Someone else's flowers were waiting for her.",
+   "real": [
+    "The shelter as it looks today: grey precast concrete wall, a long wooden-slat bench, a scratched clear side panel, one orange streetlamp, gravel shoulder and dry scrub behind. Checked from photos taken this year."
+   ],
+   "photos": [
+    {
+     "file": "ref-shelter-01.jpg",
+     "cap": "The shelter from across the road",
+     "year": "2026",
+     "artist": "<Commons author>",
+     "license": "CC BY-SA 4.0",
+     "page": "https://commons.wikimedia.org/wiki/File:<file>"
+    }
+   ],
+   "places": [
+    {
+     "name": "Bus shelter, <road>, <town>",
+     "meta": "Free · public · last bus ~<time>",
+     "url": "https://www.google.com/maps/search/?api=1&query=<lat>%2C<lng>&query_place_id=<id>",
+     "body": "Shoot from the far shoulder for the wides; the road is quiet after the last bus. A spotter watches traffic; no gear on the asphalt.",
+     "pick": true
+    }
+   ],
+   "logistics": "Arrive 30 min before blue hour. Parking on the gravel 50 m before the shelter. No permit needed for a small crew without blocking the shelter; leave it free for anyone waiting.",
+   "root": {
+    "label": "The root",
+    "quote": "Flowers found on your path are meant for you.",
+    "text": "An old folk superstition, and the universal small tragedy of the missed last bus. The story turns a bad night into a found gift."
+   },
+   "frames": [
+    {
+     "title": "Gone",
+     "action": "The bus pulls away in red streaks; Maya runs, one heel in her hand.",
+     "camera": "Wide from across the road · 1/4 s · rear-curtain flash"
+    },
+    {
+     "title": "Kerb",
+     "action": "She stops, kicks off the other heel, watches the lights shrink.",
+     "camera": "Medium · direct flash"
+    },
+    {
+     "title": "The bouquet",
+     "action": "Through the side panel: flowers alone on the bench, a sealed card.",
+     "camera": "Through the polycarbonate · her reflection over the flowers",
+     "sig": true
+    },
+    {
+     "title": "The card",
+     "action": "She reads it, grins, tucks one flower behind her ear.",
+     "camera": "Close-up · direct flash"
+    },
+    {
+     "title": "Encore",
+     "action": "On the bench, bouquet as a microphone; her giant red shadow on the wall.",
+     "camera": "Wide inside the shelter · red gel low right"
+    },
+    {
+     "title": "Hitchhiker",
+     "action": "Headlights: she holds the bouquet out like a sign, staring into the lens.",
+     "camera": "Medium · backlight from the headlights"
+    },
+    {
+     "title": "Petals",
+     "action": "Wind from the car tears petals past her laughing face.",
+     "camera": "Low close-up · 1/8 s · flash freezes the face",
+     "sig": true
+    },
+    {
+     "title": "Left behind",
+     "action": "The card and her heels on the bench; she walks away barefoot.",
+     "camera": "Wide, same spot as frame 1"
+    }
+   ],
+   "diagram": "<svg viewBox=\"0 0 620 440\" role=\"img\" aria-label=\"Lighting diagram: Last Bus, frame 5\" xmlns=\"http://www.w3.org/2000/svg\" class=\"diagram\"><style>.dl{font:700 14px Assistant,Arial,sans-serif;fill:var(--ink);text-anchor:middle}.ds{font:400 12px Assistant,Arial,sans-serif;fill:var(--muted);text-anchor:middle}.dm{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4;fill:none}</style><path d=\"M470,320 L149,242 L257,68 Z\" fill=\"#D23A3A\" fill-opacity=\"0.22\"/><rect x=\"40\" y=\"30\" width=\"540\" height=\"14\" fill=\"var(--muted)\"/><text x=\"310\" y=\"22\" class=\"dl\">Shelter back wall (concrete)</text><text x=\"310\" y=\"64\" class=\"ds\">her red shadow lands here, left of her</text><ellipse cx=\"200\" cy=\"80\" rx=\"70\" ry=\"16\" fill=\"var(--ink)\" fill-opacity=\"0.18\"/><text x=\"200\" y=\"110\" class=\"ds\">giant shadow</text><rect x=\"150\" y=\"190\" width=\"300\" height=\"12\" fill=\"var(--muted)\"/><text x=\"190\" y=\"182\" class=\"ds\">wooden bench</text><line x1=\"560\" y1=\"50\" x2=\"560\" y2=\"205\" class=\"dm\"/><text x=\"590\" y=\"130\" class=\"ds\">~1.5 m</text><circle cx=\"300\" cy=\"205\" r=\"16\" fill=\"var(--surface)\" stroke=\"var(--ink)\" stroke-width=\"2\"/><circle cx=\"300\" cy=\"199\" r=\"5\" fill=\"var(--ink)\"/><text x=\"300\" y=\"241\" class=\"dl\">Maya on the bench</text><rect x=\"284\" y=\"384\" width=\"32\" height=\"22\" rx=\"4\" fill=\"var(--ink)\"/><rect x=\"293\" y=\"374\" width=\"14\" height=\"11\" fill=\"var(--ink)\"/><text x=\"300\" y=\"425\" class=\"dl\">Camera</text><text x=\"300\" y=\"441\" class=\"ds\">28mm · f/5.6 · 1/8 · rear curtain</text><g transform=\"translate(470,320) rotate(-147)\"><rect x=\"-14\" y=\"-10\" width=\"22\" height=\"20\" rx=\"3\" fill=\"#D23A3A\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><rect x=\"8\" y=\"-13\" width=\"5\" height=\"26\" fill=\"var(--ink)\"/></g><text x=\"500\" y=\"360\" class=\"dl\">Strobe · red gel</text><text x=\"500\" y=\"376\" class=\"ds\">low right, bare: hard 'tail light'</text></svg>",
+   "prod": [
+    [
+     "Styling",
+     "Black satin slip over an opaque black bodysuit (hers), cropped denim jacket (hers), black strappy heels (hers). To buy: a bouquet of in-season flowers in kraft paper, ~<price>; a cream envelope."
+    ],
+    [
+     "Light with your kit",
+     "Direct flash on camera for most frames; one strobe with a red gel low and bare for frame 5 (see diagram) and as the 'headlights' backlight for frames 6-7. Slow shutter for trails; rear-curtain sync."
+    ],
+    [
+     "Logistics",
+     "Blue hour only (~40 min): shoot frames 1, 2 and 8 first while the sky still holds colour. Spotter for traffic. Total cost: the flowers."
+    ]
+   ]
+  }
+ ],
+ "sections": [
+  {
+   "id": "plan",
+   "h2": "Shoot-day plan",
+   "html": "<div class='cols'><div><h3>Order</h3><p>Wides first (1, 2, 8), then the shelter frames (3-5), then the headlight frames (6-7).</p></div><div><h3>Bring</h3><p>Camera + wide lens, on-camera flash, one strobe + red gel + stand, sandbag, the bouquet, a towel for her feet.</p></div><div><h3>Don't bring</h3><p>Haze (public road), anything that blocks the shelter.</p></div></div>"
+  }
+ ]
+}

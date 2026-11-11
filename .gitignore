@@ -1,0 +1,29 @@
+# Machine-local Claude settings
+.claude/settings.local.json
+
+# Private images: model photos, WhatsApp media, generated frames, downloaded location photos
+models/*/refs/
+models/*/ig/
+models/*/wa/
+shoots/*/boards/
+shoots/*/board/img/
+shoots/*/locations/**/*.jpg
+shoots/*/locations/**/*.jpeg
+shoots/*/locations/**/*.png
+shoots/*/locations/**/*.webp
+shoots/*/refs/
+
+# Scratch
+scratch/
+.research/
+*.tmp
+.DS_Store
+__pycache__/
+
+# Never commit secrets
+*.env
+.env*
+
+# Contact sheets of private photos
+models/*/*_sheet.jpg
+*.log

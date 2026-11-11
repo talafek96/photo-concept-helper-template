@@ -1,0 +1,137 @@
+
+/* Layout: a treatment book (RTL or LTR, logical properties throughout). Each concept is a chapter; the storyboard is a numbered shot list read like a reel. */
+:root{
+  --bg:#ECEEE9; --surface:#F7F8F5; --ink:#1A1E1B; --muted:#5B635C; --line:#CBD1C8;
+  --thi:#C2561A; --hoa:#8E2240; --to:#8E6C1C; --suong:#3E6A78; --luu:#B0202E; --tuong:#9C1F1F;
+  --ok:#2F7A4A; --warn:#A35A00; --no:#A33A2A;
+  --accent:var(--ink);
+  --display:"Be Vietnam Pro", "Assistant", "Helvetica Neue", Arial, sans-serif;
+  --body:"Be Vietnam Pro", "Assistant", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111412; --surface:#191D1A; --ink:#E4E8E2; --muted:#9AA39B; --line:#2E352F;
+  --thi:#F08A45; --hoa:#E06A8C; --to:#D9B456; --suong:#7FB3C4; --luu:#F0606C; --tuong:#E8605A;
+  --ok:#6CC58F; --warn:#E5A84B; --no:#EE7B68; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#111412; --surface:#191D1A; --ink:#E4E8E2; --muted:#9AA39B; --line:#2E352F;
+  --thi:#F08A45; --hoa:#E06A8C; --to:#D9B456; --suong:#7FB3C4; --luu:#F0606C; --tuong:#E8605A;
+  --ok:#6CC58F; --warn:#E5A84B; --no:#EE7B68; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 96px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+a{color:inherit;text-underline-offset:3px}
+.label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.prose{max-width:70ch;display:grid;gap:14px}
+.muted{color:var(--muted)}
+ul.tight{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+
+header.mast{padding-block:56px 40px;display:grid;gap:22px;border-bottom:1px solid var(--line)}
+header.mast h1{font-size:clamp(44px,8vw,104px);font-weight:800;letter-spacing:-.02em}
+header.mast h1 span{font-weight:300}
+.mast-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mast-strip img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
+nav.toc a{text-decoration:none;border-bottom:1px solid var(--line)}
+nav.toc a:hover{border-color:currentColor}
+
+section.block{padding-block:48px;border-bottom:1px solid var(--line);display:grid;gap:22px}
+section.block h2{font-size:clamp(26px,3.4vw,36px);font-weight:800}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.cols > div{display:grid;gap:8px;align-content:start;min-width:0}
+.cols h3{font-size:18px;font-weight:700}
+
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:15.5px}
+th,td{text-align:start;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted);font-weight:700}
+td:first-child{font-weight:700}
+.st{font-size:13px;font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)} .st.warn{color:var(--warn)} .st.no{color:var(--no)}
+
+.chapter{padding-block:72px 32px;border-bottom:1px solid var(--line);display:grid;gap:40px}
+.chapter[data-c="thi"]{--accent:var(--thi)}
+.chapter[data-c="hoa"]{--accent:var(--hoa)}
+.chapter[data-c="to"]{--accent:var(--to)}
+.chapter[data-c="suong"]{--accent:var(--suong)}
+.chapter[data-c="luu"]{--accent:var(--luu)}
+.chapter[data-c="tuong"]{--accent:var(--tuong)}
+.ch-head{display:grid;gap:14px}
+.ch-num{font-size:14px;font-weight:700;color:var(--accent)}
+.ch-title{font-size:clamp(52px,9vw,120px);font-weight:800;letter-spacing:-.03em;color:var(--accent);font-family:"Be Vietnam Pro", Arial, sans-serif}
+.ch-trans{font-size:clamp(18px,2.2vw,23px);font-weight:300}
+.logline{font-size:clamp(19px,2vw,22px);max-width:62ch}
+.hero{width:100%;display:block;aspect-ratio:3/2;object-fit:cover;cursor:zoom-in}
+.heritage{border-inline-start:3px solid var(--accent);padding-block:4px;padding-inline-start:18px;display:grid;gap:10px;max-width:74ch}
+.heritage .quote{font-weight:700;font-size:19px}
+
+.premise{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.premise div{display:grid;gap:6px;align-content:start}
+
+.loc{display:grid;gap:18px}
+.loc-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figure img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--line)}
+figcaption{font-size:13px;color:var(--muted);line-height:1.5}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
+.tag.real{color:var(--ok)}
+.tag.ai{color:var(--accent)}
+.tag.build{color:var(--muted)}
+
+.verdict{background:var(--surface);border:1px solid var(--line);padding:16px 18px;display:grid;gap:8px;max-width:80ch}
+.places{display:grid;border-top:1px solid var(--line)}
+.place{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr);gap:8px 28px;padding-block:18px;border-bottom:1px solid var(--line)}
+.place h4{font-size:19px;font-weight:700;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.place .rank{font-size:13px;color:var(--accent);font-variant-numeric:tabular-nums}
+.place .meta{font-size:14.5px;color:var(--muted);display:grid;gap:4px;align-content:start;min-width:0;overflow-wrap:anywhere}
+.place .body{display:grid;gap:6px;font-size:15.5px;min-width:0}
+.pick{font-size:12px;font-weight:700;background:var(--accent);color:var(--bg);padding:1px 8px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+.board{display:grid;gap:10px}
+.board-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px}
+.board-head h3{font-size:26px;font-weight:800}
+.contact{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:22px}
+.contact[data-count="6"]{grid-template-columns:repeat(3,1fr)}
+.contact button{all:unset;cursor:pointer;position:relative;display:block}
+.contact button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.contact img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.contact span{position:absolute;inset-inline-start:0;top:0;background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;padding:1px 7px;font-variant-numeric:tabular-nums}
+.shots{display:grid;gap:44px}
+.shot{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
+.shot img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;cursor:zoom-in}
+.shot-text{display:grid;gap:12px;min-width:0}
+.shot-no{font-size:14px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.shot-text h4{font-size:24px;font-weight:800}
+.shot-text dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15.5px}
+.shot-text dt{font-size:13px;font-weight:700;color:var(--muted);padding-top:3px}
+.shot-text dd{margin:0}
+.sig{display:inline-block;font-size:12px;font-weight:700;background:var(--accent);color:var(--bg);padding:2px 8px;width:max-content}
+
+.prod{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.prod > div{display:grid;gap:10px;align-content:start;min-width:0}
+.prod h3{font-size:19px;font-weight:800;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.sigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sigs figure img{aspect-ratio:3/2;cursor:zoom-in}
+.sigs figcaption{color:var(--ink);font-size:15px}
+
+.part{padding-block:64px 8px;display:grid;gap:12px}
+.part h2{font-size:clamp(34px,5vw,56px);font-weight:800}
+
+dialog{border:0;padding:0;background:transparent;max-width:min(96vw,1600px)}
+dialog::backdrop{background:rgba(0,0,0,.88)}
+dialog img{max-width:100%;max-height:88vh;display:block}
+dialog p{color:#ddd;font-size:13px;padding-top:8px}
+
+@media (max-width:760px){
+  .shot{grid-template-columns:1fr;gap:14px}
+  .contact,.contact[data-count="6"]{grid-template-columns:repeat(2,1fr)}
+  .mast-strip{grid-template-columns:1fr 1fr}
+  .mast-strip img:last-child{display:none}
+  .place{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){ .contact img{transition:filter .2s} .contact button:hover img{filter:brightness(1.08)} }

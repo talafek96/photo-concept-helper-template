@@ -1,0 +1,1 @@
+One folder per model (`models/<name>/`): `profile.md` and `identity.txt` are tracked; her photos in `refs/`, `ig/`, `wa/` are gitignored and stay on this machine. Written by the `study-model` skill (template: `templates/model/`).
